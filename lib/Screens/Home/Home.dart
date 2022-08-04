@@ -9,8 +9,9 @@ class HomePage extends StatefulWidget {
 
 class _MyWidgetState extends State<HomePage> {
   final List<Map> feild = [
-    {'Name': 'Gift Shop', 'Image': 'assets/png/g1.jpeg', 'Location': 'Jaffna'},
+    {'Name': 'Book Shop', 'Image': 'assets/png/g1.jpeg', 'Location': 'Jaffna'},
     {'Name': 'Fruit Shop', 'Image': 'assets/png/g2.jpeg', 'Location': 'Batti'},
+       {'Name': 'Gift Shop', 'Image': 'assets/png/g3.jpeg', 'Location': 'Batti'},
   ];
 
   @override

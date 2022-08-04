@@ -83,7 +83,7 @@ class _MyWidgetState extends State<HomePage> {
                         child: Text(
                           "Location :" + feild[index]['Location'],
                           style: TextStyle(
-                              color: kPrimaryDarkColor,
+                              color: Colors.redAccent,
                               fontSize: 16,
                             ),
                         ),

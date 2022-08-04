@@ -20,6 +20,7 @@ class _MyWidgetState extends State<HomePage> {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+           backgroundColor: Colors.red,
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {},

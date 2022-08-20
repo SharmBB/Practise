@@ -1,12 +1,15 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practise/Screens/Home/Home.dart';
 import 'package:practise/Screens/Signup/signup.dart';
+import 'package:practise/Screens/forgotPassword/forgotPassword.dart';
 import 'package:practise/Utils/Constraints.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +29,10 @@ class _MyHomePageState extends State<SignIn_body> {
 
   String? email, password;
   final auth = FirebaseAuth.instance;
+
+  String? userEmail = "";
+  String? name = "";
+  String? image = "";
 
   bool showPassword = true;
   bool _isLoading = false;
@@ -104,6 +111,7 @@ class _MyHomePageState extends State<SignIn_body> {
                       SizedBox(
                         height: 30,
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(right: 25.0),
                         child: Container(
@@ -111,11 +119,11 @@ class _MyHomePageState extends State<SignIn_body> {
                           child: InkWell(
                             highlightColor: Colors.transparent,
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => ForgetPassword()),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Forget(title: '',)),
+                              );
                             },
                             child: Padding(
                               padding:
@@ -293,7 +301,11 @@ class _MyHomePageState extends State<SignIn_body> {
                       // with custom text
                       SignInButton(
                         Buttons.Google,
-                        onPressed: () {},
+                        onPressed: () async {
+                          await signInWithGoogle();
+
+                          setState(() {});
+                        },
                       ),
                       SizedBox(
                         height: 20,
@@ -382,11 +394,13 @@ class _MyHomePageState extends State<SignIn_body> {
         errorMessage = 'Successfully logged In!.';
         prefs.setString('userId', user!.uid);
         prefs.setString('email', _emailController.text.trim());
-        prefs.setString('usemailerId', user!.uid);
+        prefs.setString('usemailerId', user.uid);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => HomePage(email: _emailController.text)),
+              builder: (context) => HomePage(
+                    email: _emailController.text,
+                  )),
         );
         // print(user!.email);
       }
@@ -514,6 +528,42 @@ class _MyHomePageState extends State<SignIn_body> {
         ),
       ),
     );
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser != null) {
+      prefs.setString('email', googleUser.email);
+      prefs.setString('name', googleUser.displayName!);
+      prefs.setString('photo', googleUser.photoUrl!);
+      prefs.setString('userId', googleUser.id);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(email: '')),
+      );
+    }
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // userEmail = googleUser.email;
+    // name = googleUser!.displayName!;
+    // image = googleUser!.photoUrl!;
+
+    print(name);
+    print(image);
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   //Sign In Button

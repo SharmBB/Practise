@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:practise/Screens/Home/Home.dart';
 import 'package:practise/Screens/Login/login.dart';
+import 'package:practise/Screens/SplashScreen/logosplash.dart';
 
 import 'package:practise/Utils/Constraints.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,12 +60,14 @@ class _CheckAuthState extends State<CheckAuth> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var userId = prefs.getString('userId');
+    var ID = prefs.getString('id');
     // var userId = FirebaseAuth.instance.currentUser;
 
     if (userId != null) {
       setState(() {
         isAuth = true;
         print(userId);
+        print(ID);
         print("Successfuly loggedin");
       });
     } else {
@@ -76,9 +79,9 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = HomePage(email: '',);
+      child = HomePage(email: '');
     } else {
-      child = SignIn_body();
+      child = LogoSplashScreen();
     }
     return Scaffold(
       body: child,

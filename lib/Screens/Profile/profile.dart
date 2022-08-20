@@ -4,14 +4,20 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:practise/Screens/Home/Home.dart';
 import 'package:practise/Screens/Login/login.dart';
+import 'package:practise/Screens/Map/googleMap.dart';
+import 'package:practise/Screens/Rooms/getrooms.dart';
 import 'package:practise/Utils/Constraints.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({
-    key,
+  final String email;
+  ProfileScreen({
+    Key? key,
+    required this.email,
   }) : super(key: key);
 
   @override
@@ -19,18 +25,29 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _SettingState extends State<ProfileScreen> {
+  String? mail;
+  String? name;
+  String? photo;
+
+  String? email;
   var currentIndex = 3;
 
-//bottombar icons
-  List<IconData> listOfIcons = [
-    Icons.home_rounded,
-    Icons.search_sharp,
-    Icons.local_library_outlined,
-    Icons.settings_rounded,
-  ];
+  //reterive details from local storages
+  void _getUserDetails() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    mail = localStorage.getString("email")!;
+    // name = localStorage.getString("name")!;
+    // photo = localStorage.getString("photo")!;
+    // print("email -:" + mail!);
+    // print("name -:" + name!);
+    // print("photo-:" + photo!);
+  }
 
   @override
   void initState() {
+    // email = widget.email;
+    // print(email);
+    _getUserDetails();
     super.initState();
   }
 
@@ -43,32 +60,6 @@ class _SettingState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: kPrimaryWhiteColor,
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   title: Text(
-      //     "Profile",
-      //     style: TextStyle(
-      //       color: kPrimaryYellow,
-      //       fontSize: 18,
-      //     ),
-      //   ),
-      //   actions: [
-      //     Padding(
-      //       padding: const EdgeInsets.only(right: 8.0),
-      //       child: IconButton(
-      //         icon: Icon(Icons.close, color: kPrimaryWhiteColor),
-      //         onPressed: () {
-      //           // Navigator.push(
-      //           //   context,
-      //           //   MaterialPageRoute(builder: (context) => HomeScreen()),
-      //           // );
-      //         },
-      //       ),
-      //     ),
-      //   ],
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      // ),
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (OverscrollIndicatorNotification overscroll) {
           overscroll.disallowGlow();
@@ -82,7 +73,6 @@ class _SettingState extends State<ProfileScreen> {
             ),
             child: Column(
               children: <Widget>[
-                // SizedBox(height: 30),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -91,35 +81,28 @@ class _SettingState extends State<ProfileScreen> {
                           CircleAvatar(
                               child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProfileScreen()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => ProfileScreen()),
+                              // );
                             },
                             child: Image.asset(
-                              "assets/png/aaru.png",
+                              "assets/png/profile.png",
                             ),
                           )),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
                                 Text(
-                                  'Aaruran L',
+                                  mail.toString(),
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
+                                    fontWeight: FontWeight.bold,
                                     color: primaryColor,
                                     fontSize: 16,
                                   ),
-                                ),
-                                Text(
-                                  'Show Profile',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      color: Colors.amber,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -223,7 +206,6 @@ class _SettingState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
                   onTap: () {},
@@ -259,7 +241,6 @@ class _SettingState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
                   onTap: () {},
@@ -383,7 +364,9 @@ class _SettingState extends State<ProfileScreen> {
                 SizedBox(height: 30),
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
-                  onTap: () {
+                  onTap: () async {
+                    await GoogleSignIn().signOut();
+                    _handleLogout(context);
                     _auth.signOut().whenComplete(() {
                       Navigator.pushReplacement(
                         context,
@@ -425,36 +408,103 @@ class _SettingState extends State<ProfileScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
-        fixedColor: Colors.blue,
-        items: [
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            label: 'Cart',
-            icon: Icon(Icons.bookmark),
-          ),
-          BottomNavigationBarItem(
-            label: 'Profile',
-            icon: Icon(
-              Icons.people,
+      bottomNavigationBar: Container(
+        height: screenWidth * .200,
+        decoration: BoxDecoration(
+          color: darkBlue,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.15),
+              blurRadius: 30,
+              offset: Offset(0, 10),
+            ),
+          ],
+        ),
+        child: ListView.builder(
+          itemCount: 4,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          itemBuilder: (context, index) => InkWell(
+            onTap: () {
+              setState(
+                () {
+                  currentIndex = index;
+                  print(currentIndex);
+                  if (currentIndex == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage(
+                                email: '',
+                              )),
+                    );
+                  } else if (currentIndex == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MapView()),
+                    );
+                  } else if (currentIndex == 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FetchData()),
+                    );
+                  } else if (currentIndex == 3) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileScreen(
+                                email: '',
+                              )),
+                    );
+                  }
+                },
+              );
+            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 1000),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  margin: EdgeInsets.only(
+                    bottom: index == currentIndex ? 0 : screenWidth * .05,
+                    right: screenWidth * .0422,
+                    left: screenWidth * .0422,
+                  ),
+                  width: screenWidth * .128,
+                  height: index == currentIndex ? screenWidth * .02 : 0,
+                  decoration: BoxDecoration(
+                    color: kPrimaryYellow,
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(10),
+                    ),
+                  ),
+                ),
+                Icon(
+                  listOfIcons[index],
+                  size: screenWidth * .08,
+                  color: index == currentIndex
+                      ? kPrimaryYellow
+                      : kPrimaryWhiteColor,
+                ),
+                SizedBox(height: screenWidth * .03),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
-}
 
-List<IconData> listOfIcons = [
-  Icons.home_rounded,
-  Icons.search_sharp,
-  Icons.local_library_outlined,
-  Icons.settings_rounded,
-];
+  List<IconData> listOfIcons = [
+    Icons.home_rounded,
+    Icons.map,
+    Icons.room,
+    Icons.settings_rounded,
+  ];
+}
 
 //LOGOUT
 void _handleLogout(BuildContext context) async {
@@ -462,9 +512,9 @@ void _handleLogout(BuildContext context) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     localStorage.remove('token');
     localStorage.remove('userId');
-
-    // Navigator.pushReplacement(
-    //     context, MaterialPageRoute(builder: (context) => Signup()));
+    localStorage.remove('email');
+    localStorage.remove('name');
+    localStorage.remove('photo');
   } catch (e) {
     print(e);
   }

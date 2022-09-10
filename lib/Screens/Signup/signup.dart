@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practise/Screens/Login/login.dart';
 import 'package:practise/Utils/Constraints.dart';
+import 'package:flutter/cupertino.dart';
 
 class SignUp_body extends StatefulWidget {
   @override
@@ -13,6 +16,8 @@ class SignUp_body extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp_body> {
+
+  bool _isLoading = false;
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   GlobalKey<FormState> formKey = new GlobalKey();
@@ -113,7 +118,11 @@ class _SignUpState extends State<SignUp_body> {
                         SizedBox(
                           height: 30,
                         ),
-                        _Register(),
+                          !_isLoading
+                              ? _Register()
+                              : CupertinoActivityIndicator(
+                                  radius: 15,
+                                ),
                         SizedBox(
                           height: 40,
                         ),
@@ -349,6 +358,10 @@ class _SignUpState extends State<SignUp_body> {
     String password = _passwordController.text.trim();
     // String confirmpassword = _confpasswordController.text.trim();
 
+      setState(() {
+      _isLoading = true;
+    });
+
     try {
       final User? user = (await _auth.createUserWithEmailAndPassword(
               email: email, password: password))
@@ -365,6 +378,9 @@ class _SignUpState extends State<SignUp_body> {
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
+    setState(() {
+      _isLoading = false;
+    });
     // } else {
     //   Fluttertoast.showToast(msg: "Passwords don't match");
   }

@@ -10,6 +10,7 @@ import 'package:practise/Screens/Signup/signup.dart';
 import 'package:practise/Screens/forgotPassword/forgotPassword.dart';
 import 'package:practise/Utils/Constraints.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:practise/Utils/sharedPreferences.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -122,7 +123,9 @@ class _MyHomePageState extends State<SignIn_body> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Forget(title: '',)),
+                                    builder: (context) => Forget(
+                                          title: '',
+                                        )),
                               );
                             },
                             child: Padding(
@@ -142,7 +145,11 @@ class _MyHomePageState extends State<SignIn_body> {
                       SizedBox(
                         height: 30,
                       ),
-                      _signIn(),
+                      !_isLoading
+                          ? _signIn()
+                          : CupertinoActivityIndicator(
+                              radius: 15,
+                            ),
                       //     Padding(
                       //       padding: const EdgeInsets.all(20.0),
                       //       child: Form(
@@ -392,6 +399,8 @@ class _MyHomePageState extends State<SignIn_body> {
       if (userCredential != null) {
         User? user = FirebaseAuth.instance.currentUser;
         errorMessage = 'Successfully logged In!.';
+        MySharedPreferences.instance
+            .setStringValue("Email", _emailController.text.trim());
         prefs.setString('userId', user!.uid);
         prefs.setString('email', _emailController.text.trim());
         prefs.setString('usemailerId', user.uid);
@@ -535,9 +544,11 @@ class _MyHomePageState extends State<SignIn_body> {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     if (googleUser != null) {
+      MySharedPreferences.instance
+          .setStringValue("photo", googleUser.photoUrl!);
       prefs.setString('email', googleUser.email);
       prefs.setString('name', googleUser.displayName!);
-      prefs.setString('photo', googleUser.photoUrl!);
+      // prefs.setString('photo', googleUser.photoUrl!);
       prefs.setString('userId', googleUser.id);
       Navigator.push(
         context,

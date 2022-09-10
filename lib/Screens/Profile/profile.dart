@@ -8,8 +8,15 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:practise/Screens/Home/Home.dart';
 import 'package:practise/Screens/Login/login.dart';
 import 'package:practise/Screens/Map/googleMap.dart';
+import 'package:practise/Screens/Profile/newUserProfile.dart';
+import 'package:practise/Screens/Profile/userDetails.dart';
+import 'package:practise/Screens/Profile/userProfileView.dart';
 import 'package:practise/Screens/Rooms/getrooms.dart';
+import 'package:practise/Screens/forgotPassword/forgotPassword.dart';
+import 'package:practise/Support/privacyPolicy.dart';
+import 'package:practise/Support/termOfService.dart';
 import 'package:practise/Utils/Constraints.dart';
+import 'package:practise/Utils/sharedPreferences.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,13 +35,20 @@ class _SettingState extends State<ProfileScreen> {
   String? mail;
   String? name;
   String? photo;
+  String userPhoto = "";
 
   String? email;
   var currentIndex = 3;
 
+  String userName = "";
+
+  // loader
+  bool _isLoading = true;
+
   //reterive details from local storages
   void _getUserDetails() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+    userPhoto = await MySharedPreferences.instance.getStringValue("photo");
     mail = localStorage.getString("email")!;
     // name = localStorage.getString("name")!;
     // photo = localStorage.getString("photo")!;
@@ -43,11 +57,25 @@ class _SettingState extends State<ProfileScreen> {
     // print("photo-:" + photo!);
   }
 
+  //get subjects details from api
+  void _apiGetSubjects() async {
+    userName = await MySharedPreferences.instance.getStringValue("Email");
+    print("hello" + userName);
+
+    try {} catch (e) {
+      print(e);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     // email = widget.email;
     // print(email);
     _getUserDetails();
+    _apiGetSubjects();
     super.initState();
   }
 
@@ -68,7 +96,7 @@ class _SettingState extends State<ProfileScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
-              top: 40,
+              top: 60,
               left: 20,
             ),
             child: Column(
@@ -80,23 +108,18 @@ class _SettingState extends State<ProfileScreen> {
                         children: [
                           CircleAvatar(
                               child: InkWell(
-                            onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => ProfileScreen()),
-                              // );
-                            },
-                            child: Image.asset(
-                              "assets/png/profile.png",
-                            ),
-                          )),
+                                  onTap: () {},
+                                  child: userPhoto == ""
+                                      ? Image.asset(
+                                          "assets/png/profile.png",
+                                        )
+                                      : Image.network(userPhoto))),
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
                                 Text(
-                                  mail.toString(),
+                                  '${userName}',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -111,7 +134,7 @@ class _SettingState extends State<ProfileScreen> {
                       )
                     ]),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -131,7 +154,12 @@ class _SettingState extends State<ProfileScreen> {
                 ),
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfileView()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(
                       left: 0,
@@ -173,7 +201,15 @@ class _SettingState extends State<ProfileScreen> {
                 ),
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Forget(
+                                title: '',
+                              )),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(
                       right: 20,
@@ -206,76 +242,76 @@ class _SettingState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                InkWell(
-                  highlightColor: kPrimaryBlueColor,
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 20,
-                      bottom: 10,
-                      top: 10,
-                    ),
-                    child: Container(
-                      height: 30,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Social Connect",
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16.0,
-                            color: kPrimaryGreyColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  highlightColor: kPrimaryBlueColor,
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 20,
-                      bottom: 10,
-                      top: 10,
-                    ),
-                    child: Container(
-                      height: 30,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Switch to local guide",
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16.0,
-                            color: kPrimaryGreyColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   highlightColor: kPrimaryBlueColor,
+                //   onTap: () {},
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(
+                //       right: 20,
+                //       bottom: 10,
+                //       top: 10,
+                //     ),
+                //     child: Container(
+                //       height: 30,
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Row(
+                //             children: [
+                //               Text(
+                //                 "Social Connect",
+                //                 style: TextStyle(
+                //                   color: primaryColor,
+                //                   fontSize: 18,
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //           Icon(
+                //             Icons.arrow_forward_ios,
+                //             size: 16.0,
+                //             color: kPrimaryGreyColor,
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // InkWell(
+                //   highlightColor: kPrimaryBlueColor,
+                //   onTap: () {},
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(
+                //       right: 20,
+                //       bottom: 10,
+                //       top: 10,
+                //     ),
+                //     child: Container(
+                //       height: 30,
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Row(
+                //             children: [
+                //               Text(
+                //                 "Switch to local guide",
+                //                 style: TextStyle(
+                //                   color: primaryColor,
+                //                   fontSize: 18,
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //           Icon(
+                //             Icons.arrow_forward_ios,
+                //             size: 16.0,
+                //             color: kPrimaryGreyColor,
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -293,7 +329,12 @@ class _SettingState extends State<ProfileScreen> {
                 SizedBox(height: 20),
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => privacyPolicy()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(
                       right: 20,
@@ -328,7 +369,12 @@ class _SettingState extends State<ProfileScreen> {
                 ),
                 InkWell(
                   highlightColor: kPrimaryBlueColor,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => termService()),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(
                       right: 20,
@@ -380,7 +426,7 @@ class _SettingState extends State<ProfileScreen> {
                     padding: const EdgeInsets.only(
                       right: 20,
                       bottom: 10,
-                      top: 10,
+                      top: 50,
                     ),
                     child: Container(
                       height: 30,

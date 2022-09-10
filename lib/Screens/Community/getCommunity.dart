@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +19,26 @@ class _FetchDataState extends State<getCommunityDetails> {
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child('community');
 
+
+       bool _isLoading = false;
+
+  // This function will be called when the button gets pressed
+  _startLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    Timer(const Duration(seconds: 5), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
   Widget listItem({required Map community}) {
-    return Card(
+    return _isLoading
+              ? const CircularProgressIndicator()
+  : Card(
       elevation: 20,
       // color: Colors.amber,
       shape: RoundedRectangleBorder(
@@ -32,12 +52,11 @@ class _FetchDataState extends State<getCommunityDetails> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.messenger ,color: Colors.black, size: 45),
+            leading: Icon(Icons.messenger, color: Colors.black, size: 45),
             title: Text(
               community["chatname"],
               style: TextStyle(fontSize: 20),
             ),
-            
             subtitle: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(community["description"]),

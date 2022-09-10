@@ -9,6 +9,7 @@ import 'package:practise/Screens/Profile/profile.dart';
 import 'package:practise/Screens/Rooms/addRooms.dart';
 import 'package:practise/Screens/Rooms/getrooms.dart';
 import 'package:practise/Utils/Constraints.dart';
+import 'package:practise/Utils/sharedPreferences.dart';
 import 'package:practise/test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,16 +54,38 @@ class _MyWidgetState extends State<HomePage> {
   String? mail;
   String? name;
   String? photo;
+  String userName = "";
+  String userPhoto = "";
+
+  // loader
+  bool _isLoading = true;
 
   //store the userImage in local
   void _getUserDetails() async {
+    //  userName = await MySharedPreferences.instance.getStringValue("Email");
+    print("sss" + userName);
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     mail = localStorage.getString("email");
     // // name = localStorage.getString("name")!;
     // // photo = localStorage.getString("photo")!;
-    // print("email -:" + mail!);
+    print("email -:" + mail!);
     // print("name -:" + name!);
     // print("photo-:" + photo!);
+  }
+
+  //get subjects details from api
+  void _apiGetSubjects() async {
+    userName = await MySharedPreferences.instance.getStringValue("Email");
+    userPhoto = await MySharedPreferences.instance.getStringValue("photo");
+    print("hello" + userName);
+    print(userPhoto);
+
+    try {} catch (e) {
+      print(e);
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   String? email;
@@ -70,6 +93,7 @@ class _MyWidgetState extends State<HomePage> {
   @override
   initState() {
     _getUserDetails();
+    _apiGetSubjects();
 
     super.initState();
   }
@@ -104,24 +128,25 @@ class _MyWidgetState extends State<HomePage> {
                       children: [
                         CircleAvatar(
                             child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProfileScreen(email: mail!)),
-                            );
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProfileScreen(email: mail!)),
+                                  );
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => ProfileScreen()),
-                            // );
-                          },
-                          child: Image.asset(
-                            "assets/png/profile.png",
-                          ),
-                        )),
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => ProfileScreen()),
+                                  // );
+                                },
+                                child: userPhoto == ""
+                                    ? Image.asset(
+                                        "assets/png/profile.png",
+                                      )
+                                    : Image.network(userPhoto))),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Column(
@@ -136,7 +161,7 @@ class _MyWidgetState extends State<HomePage> {
                                 ),
                               ),
                               Text(
-                                mail.toString().trim(),
+                                '${userName}',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     color: primaryColor,

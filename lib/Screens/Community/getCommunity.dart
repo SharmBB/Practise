@@ -37,7 +37,7 @@ class _FetchDataState extends State<getCommunityDetails> {
 
   Widget listItem({required Map community}) {
     return _isLoading
-              ? const CircularProgressIndicator()
+              ?  CircularProgressIndicator()
   : Card(
       elevation: 20,
       // color: Colors.amber,

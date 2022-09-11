@@ -413,6 +413,7 @@ class _SettingState extends State<ProfileScreen> {
                   onTap: () async {
                     await GoogleSignIn().signOut();
                     _handleLogout(context);
+                      MySharedPreferences.instance.removeAll();
                     _auth.signOut().whenComplete(() {
                       Navigator.pushReplacement(
                         context,

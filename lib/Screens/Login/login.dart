@@ -546,14 +546,18 @@ class _MyHomePageState extends State<SignIn_body> {
     if (googleUser != null) {
       MySharedPreferences.instance
           .setStringValue("photo", googleUser.photoUrl!);
-      prefs.setString('email', googleUser.email);
-      prefs.setString('name', googleUser.displayName!);
+          MySharedPreferences.instance
+          .setStringValue("Email", googleUser.email);
+      // prefs.setString('email', googleUser.email);
+      // prefs.setString('name', googleUser.displayName!);
       // prefs.setString('photo', googleUser.photoUrl!);
       prefs.setString('userId', googleUser.id);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage(email: '')),
       );
+
+        Fluttertoast.showToast(msg: " Sucessfully Login !!!");
     }
 
     // Obtain the auth details from the request

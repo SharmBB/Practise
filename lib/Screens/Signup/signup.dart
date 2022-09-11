@@ -2,13 +2,15 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:practise/Screens/Home/Home.dart';
 import 'package:practise/Screens/Login/login.dart';
 import 'package:practise/Utils/Constraints.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:practise/Utils/sharedPreferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp_body extends StatefulWidget {
   @override
@@ -16,15 +18,14 @@ class SignUp_body extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp_body> {
-
   bool _isLoading = false;
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  GlobalKey<FormState> formKey = new GlobalKey();
+  GlobalKey<FormState> formKey = GlobalKey();
 
-  TextEditingController _emailController = new TextEditingController();
-  TextEditingController _passwordController = new TextEditingController();
-  TextEditingController _confpasswordController = new TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confpasswordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String? email, password;
@@ -50,85 +51,78 @@ class _SignUpState extends State<SignUp_body> {
 
     if (form!.validate()) {
       form.save();
-
-      performLogin();
     }
-  }
-
-  void performLogin() {
-    final snackbar = new SnackBar(
-      content: new Text("Email : $email, password : $password"),
-    );
-    scaffoldKey.currentState!.showSnackBar(snackbar);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        key: scaffoldKey,
-        body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 108, 74, 231),
-                  Color.fromARGB(255, 44, 21, 126),
-                  Color.fromARGB(255, 44, 21, 126),
-                  Color.fromARGB(255, 44, 21, 120),
-                  Color.fromARGB(255, 108, 74, 231),
-                ],
-              ),
-            ),
-            child: SafeArea(
-              child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-                  child: Stack(children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 50,
+      resizeToAvoidBottomInset: false,
+      key: scaffoldKey,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 108, 74, 231),
+              Color.fromARGB(255, 44, 21, 126),
+              Color.fromARGB(255, 44, 21, 126),
+              Color.fromARGB(255, 44, 21, 120),
+              Color.fromARGB(255, 108, 74, 231),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: kPrimaryLightColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
                         ),
-                        Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: kPrimaryLightColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        _email(),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        _password(),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        _Confirmpassword(),
-                        SizedBox(
-                          height: 30,
-                        ),
-                          !_isLoading
-                              ? _Register()
-                              : CupertinoActivityIndicator(
-                                  radius: 15,
-                                ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          width: 250.0,
-                          child: Row(children: <Widget>[
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      _email(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      _password(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      _Confirmpassword(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      !_isLoading
+                          ? _Register()
+                          : CupertinoActivityIndicator(
+                              radius: 15,
+                            ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        width: 250.0,
+                        child: Row(
+                          children: <Widget>[
                             Expanded(
                                 child: Divider(
                               thickness: 1.0,
@@ -142,59 +136,66 @@ class _SignUpState extends State<SignUp_body> {
                               ),
                             ),
                             Expanded(
-                                child: Divider(
-                              thickness: 1.0,
-                              color: Colors.white,
-                            )),
-                          ]),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SignInButton(
-                          Buttons.Google,
-                          onPressed: () {},
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          alignment: Alignment.topCenter,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Alredy Have an account ?",
-                                style: TextStyle(color: Colors.white),
+                              child: Divider(
+                                thickness: 1.0,
+                                color: Colors.white,
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignIn_body()),
-                                  );
-                                },
-                                child: Text(
-                                  'Sign In',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ]),
-                ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SignInButton(
+                        Buttons.Google,
+                        onPressed: () async {
+                          await signInWithGoogle();
+                        },
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Alredy Have an account ?",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignIn_body()),
+                                );
+                              },
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            )));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   //Email Feils
@@ -327,6 +328,39 @@ class _SignUpState extends State<SignUp_body> {
     );
   }
 
+//google sign in
+  Future<UserCredential> signInWithGoogle() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser != null) {
+      MySharedPreferences.instance
+          .setStringValue("photo", googleUser.photoUrl!);
+      MySharedPreferences.instance.setStringValue("Email", googleUser.email);
+
+      prefs.setString('userId', googleUser.id);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(email: '')),
+      );
+
+      Fluttertoast.showToast(msg: " Sucessfully Login !!!");
+    }
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   //Sign In Button
   _Register() {
     return Container(
@@ -358,7 +392,7 @@ class _SignUpState extends State<SignUp_body> {
     String password = _passwordController.text.trim();
     // String confirmpassword = _confpasswordController.text.trim();
 
-      setState(() {
+    setState(() {
       _isLoading = true;
     });
 
@@ -371,7 +405,10 @@ class _SignUpState extends State<SignUp_body> {
           Fluttertoast.showToast(msg: "user created");
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SignIn_body()),
+            MaterialPageRoute(
+                builder: (context) => HomePage(
+                      email: '',
+                    )),
           );
         }
       });

@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:practise/Screens/Profile/profile.dart';
 import 'package:practise/Utils/Constraints.dart';
+
 
 class termService extends StatefulWidget {
   const termService({Key? key}) : super(key: key);

@@ -7,6 +7,7 @@ import 'package:practise/Screens/Login/login.dart';
 import 'package:practise/Screens/SplashScreen/logosplash.dart';
 
 import 'package:practise/Utils/Constraints.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? initScreen;
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Quick Post',
+      title: 'Be Local',
       theme: ThemeData(
         // fontFamily: 'ProductSans',
         primaryColor: primaryColor,

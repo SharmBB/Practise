@@ -1,99 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\AARU\\Desktop\\SLTC\\Practise\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\nilakshan\\Desktop\\Aaru\\Practise\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\AARU\\Desktop\\SLTC\\Practise\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,281,385,494,614,708",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "194,276,380,489,609,703,774"
-                    },
-                    "to": {
-                        "startLines": "127,131,132,133,134,135,136",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "9016,9375,9457,9561,9670,9790,9884",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "9155,9452,9556,9665,9785,9879,9950"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\4ef6433c9297b0e58458e6706dfa6e32\\lifecycle-runtime-2.3.1\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "42",
-                        "endOffsets": "93"
-                    },
-                    "to": {
-                        "startLines": "105",
-                        "startColumns": "4",
-                        "startOffsets": "6434",
-                        "endColumns": "42",
-                        "endOffsets": "6472"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\5d93ab2f2812dcc02a149cabf48676c0\\jetified-window-1.0.0-beta04\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,7,8,9,10,11,19,23,34,51",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,234,294,346,391,451,869,1066,1790,2904",
-                        "endLines": "6,7,8,9,10,18,22,33,50,58",
-                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
-                        "endOffsets": "229,289,341,386,446,864,1061,1785,2899,3292"
-                    },
-                    "to": {
-                        "startLines": "3,8,9,10,86,159,167,375,386,403",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "165,344,404,456,5445,11389,11807,18008,18732,19846",
-                        "endLines": "7,8,9,10,86,166,170,385,402,410",
-                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
-                        "endOffsets": "339,399,451,496,5500,11802,11999,18727,19841,20234"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\6ad2882e70130260d46e79cbdbdd7320\\browser-1.4.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,113,179,242,304,375,447,515,582,661",
-                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
-                        "endOffsets": "108,174,237,299,370,442,510,577,656,725"
-                    },
-                    "to": {
-                        "startLines": "13,14,15,16,27,28,126,128,129,130",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "661,719,785,848,1713,1784,8948,9160,9227,9306",
-                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
-                        "endOffsets": "714,780,843,905,1779,1851,9011,9222,9301,9370"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AARU\\Desktop\\SLTC\\Practise\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "176,821",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "472,987"
-                    },
-                    "to": {
-                        "startLines": "138,143",
-                        "startColumns": "4,4",
-                        "startOffsets": "10026,10323",
-                        "endLines": "142,145",
-                        "endColumns": "12,12",
-                        "endOffsets": "10318,10487"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\efbf645ac7f7a6288f6f3f3011a758fb\\core-1.8.0\\res\\values\\values.xml",
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\efbf645ac7f7a6288f6f3f3011a758fb\\core-1.8.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,89,90,94,95,96,97,103,113,146,167,200",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -112,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\cc67751070ba8f7377d63ab76544c726\\jetified-play-services-base-18.0.1\\res\\values\\values.xml",
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\cc67751070ba8f7377d63ab76544c726\\jetified-play-services-base-18.0.1\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,46",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -131,7 +42,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\abce5eb4071a7c4a3a4bf619544355ad\\jetified-play-services-maps-18.0.2\\res\\values\\values.xml",
+                    "source": "C:\\Users\\nilakshan\\Desktop\\Aaru\\Practise\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,281,385,494,614,708",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "194,276,380,489,609,703,774"
+                    },
+                    "to": {
+                        "startLines": "127,131,132,133,134,135,136",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "9016,9375,9457,9561,9670,9790,9884",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "9155,9452,9556,9665,9785,9879,9950"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\abce5eb4071a7c4a3a4bf619544355ad\\jetified-play-services-maps-18.0.2\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -150,7 +78,62 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\AARU\\.gradle\\caches\\transforms-2\\files-2.1\\9563e7b25438457b4f28d4b3a4eae556\\jetified-play-services-basement-18.0.0\\res\\values\\values.xml",
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\5d93ab2f2812dcc02a149cabf48676c0\\jetified-window-1.0.0-beta04\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,7,8,9,10,11,19,23,34,51",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,234,294,346,391,451,869,1066,1790,2904",
+                        "endLines": "6,7,8,9,10,18,22,33,50,58",
+                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
+                        "endOffsets": "229,289,341,386,446,864,1061,1785,2899,3292"
+                    },
+                    "to": {
+                        "startLines": "3,8,9,10,86,159,167,375,386,403",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "165,344,404,456,5445,11389,11807,18008,18732,19846",
+                        "endLines": "7,8,9,10,86,166,170,385,402,410",
+                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
+                        "endOffsets": "339,399,451,496,5500,11802,11999,18727,19841,20234"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\nilakshan\\Desktop\\Aaru\\Practise\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,821",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "472,987"
+                    },
+                    "to": {
+                        "startLines": "138,143",
+                        "startColumns": "4,4",
+                        "startOffsets": "10026,10323",
+                        "endLines": "142,145",
+                        "endColumns": "12,12",
+                        "endOffsets": "10318,10487"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\6ad2882e70130260d46e79cbdbdd7320\\browser-1.4.0\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,113,179,242,304,375,447,515,582,661",
+                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
+                        "endOffsets": "108,174,237,299,370,442,510,577,656,725"
+                    },
+                    "to": {
+                        "startLines": "13,14,15,16,27,28,126,128,129,130",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "661,719,785,848,1713,1784,8948,9160,9227,9306",
+                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
+                        "endOffsets": "714,780,843,905,1779,1851,9011,9222,9301,9370"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\9563e7b25438457b4f28d4b3a4eae556\\jetified-play-services-basement-18.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4,7",
                         "startColumns": "0,0",
@@ -164,6 +147,23 @@
                         "startOffsets": "6477,7655",
                         "endColumns": "67,166",
                         "endOffsets": "6540,7817"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\nilakshan\\.gradle\\caches\\transforms-2\\files-2.1\\4ef6433c9297b0e58458e6706dfa6e32\\lifecycle-runtime-2.3.1\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "42",
+                        "endOffsets": "93"
+                    },
+                    "to": {
+                        "startLines": "105",
+                        "startColumns": "4",
+                        "startOffsets": "6434",
+                        "endColumns": "42",
+                        "endOffsets": "6472"
                     }
                 }
             ]

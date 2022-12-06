@@ -180,9 +180,8 @@ class _FetchDataState extends State<FetchData> {
             ),
             child: Stack(
               children: <Widget>[
-                Hero(
-                  tag: "",
-                  child: ClipRRect(
+        
+                   ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image(
                       height: 145.0,
@@ -191,7 +190,7 @@ class _FetchDataState extends State<FetchData> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                ),
+                
                 // Positioned(
                 //   left: 10.0,
                 //   bottom: 10.0,

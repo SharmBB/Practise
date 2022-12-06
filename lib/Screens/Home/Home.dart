@@ -79,7 +79,7 @@ class _MyWidgetState extends State<HomePage> {
     userName = await MySharedPreferences.instance.getStringValue("Email");
     userPhoto = await MySharedPreferences.instance.getStringValue("photo");
     print("hello" + userName);
-    print(userPhoto);
+    print("[jf" + userPhoto);
 
     try {} catch (e) {
       print(e);
@@ -104,16 +104,17 @@ class _MyWidgetState extends State<HomePage> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body:NotificationListener<OverscrollIndicatorNotification>(
-                onNotification: (OverscrollIndicatorNotification overscroll) {
-                  // ignore: deprecated_member_use
-                  overscroll.disallowGlow();
-                  return false;
-                },
-      child: SafeArea(
-              child: ListView(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  children: <Widget>[
+      body: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            // ignore: deprecated_member_use
+            overscroll.disallowGlow();
+            return false;
+          },
+          child: SafeArea(
+              child: SizedBox(
+            child: ListView(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                children: <Widget>[
                   // Padding(
                   //   padding: EdgeInsets.only(left: 20.0, right: 120.0),
                   //   child: Text(
@@ -136,6 +137,7 @@ class _MyWidgetState extends State<HomePage> {
                               CircleAvatar(
                                   child: InkWell(
                                       onTap: () {
+                                        
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -183,11 +185,12 @@ class _MyWidgetState extends State<HomePage> {
                           IconButton(
                             icon: Icon(Icons.notifications),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchMap()),
-                              );
+                              print("hello");
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SearchMap()),
+                              // );
                             },
                           ),
                         ],
@@ -414,103 +417,107 @@ class _MyWidgetState extends State<HomePage> {
                   // ),
                   Container(
                     height: 140.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: feild.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        //  Destination destination = destinations[index];
-                        return GestureDetector(
-                          // onTap: () => Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (_) => DestinationScreen(
-                          //       destination: destination,
-                          //     ),
-                          //   ),
-                          // ),
-                          child: Container(
-                            margin: EdgeInsets.all(10.0),
-                            width: 240.0,
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              children: <Widget>[
-                                Positioned(
-                                  bottom: 15.0,
-                                  child: Container(
-                                    // height: 120.0,
-                                    // width: 200.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10.0),
+                    child: SizedBox(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: feild.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          //  Destination destination = destinations[index];
+                          return GestureDetector(
+                            // onTap: () => Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (_) => DestinationScreen(
+                            //       destination: destination,
+                            //     ),
+                            //   ),
+                            // ),
+                            child: Container(
+                              margin: EdgeInsets.all(10.0),
+                              width: 240.0,
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: <Widget>[
+                                  Positioned(
+                                    bottom: 15.0,
+                                    child: Container(
+                                      // height: 120.0,
+                                      // width: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: Offset(0.0, 2.0),
-                                        blurRadius: 6.0,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Hero(
-                                        tag: "",
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              print("object");
-                                              if (feild[index]['Name'] ==
-                                                  'chat') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          getCommunityDetails()),
-                                                );
-                                              } else if (feild[index]['Name'] ==
-                                                  'rooms') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          FetchData()),
-                                                );
-                                              } else if (feild[index]['Name'] ==
-                                                  'map') {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MapView()),
-                                                );
-                                              }
-                                            },
-                                            child: Image(
-                                              height: 160.0,
-                                              width: 240.0,
-                                              image: AssetImage(
-                                                  feild[index]["Image"]),
-                                              fit: BoxFit.cover,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0.0, 2.0),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: <Widget>[
+                                    
+                                           ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                print("object");
+                                                if (feild[index]['Name'] ==
+                                                    'chat') {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            getCommunityDetails()),
+                                                  );
+                                                } else if (feild[index]
+                                                        ['Name'] ==
+                                                    'rooms') {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            FetchData()),
+                                                  );
+                                                } else if (feild[index]
+                                                        ['Name'] ==
+                                                    'map') {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            MapView()),
+                                                  );
+                                                }
+                                              },
+                                              child: Image(
+                                                height: 160.0,
+                                                width: 240.0,
+                                                image: AssetImage(
+                                                    feild[index]["Image"]),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                                        
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                   Column(
@@ -562,136 +569,138 @@ class _MyWidgetState extends State<HomePage> {
                   ),
                   Container(
                     height: 300.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: rooms.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        //  Destination destination = destinations[index];
-                        return GestureDetector(
-                          // onTap: () => Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (_) => DestinationScreen(
-                          //       destination: destination,
-                          //     ),
-                          //   ),
-                          // ),
-                          child: Container(
-                            margin: EdgeInsets.all(10.0),
-                            width: 210.0,
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              children: <Widget>[
-                                Positioned(
-                                  bottom: 15.0,
-                                  child: Container(
-                                    height: 120.0,
-                                    width: 210.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(10.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            '6 person Interested',
-                                            style: TextStyle(
-                                              fontSize: 16.0,
-                                              // fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Text(
-                                            "Room will be deleted on 11/10/2022",
-                                            style: TextStyle(
-                                              color: Colors.amber,
-                                              fontSize: 12.0,
-                                            ),
-                                          ),
-                                        ],
+                    child: SizedBox(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: rooms.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          //  Destination destination = destinations[index];
+                          return GestureDetector(
+                            // onTap: () => Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (_) => DestinationScreen(
+                            //       destination: destination,
+                            //     ),
+                            //   ),
+                            // ),
+                            child: Container(
+                              margin: EdgeInsets.all(10.0),
+                              width: 210.0,
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: <Widget>[
+                                  Positioned(
+                                    bottom: 15.0,
+                                    child: Container(
+                                      height: 120.0,
+                                      width: 210.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: Offset(0.0, 2.0),
-                                        blurRadius: 6.0,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Hero(
-                                        tag: "",
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          child: Image(
-                                            height: 180.0,
-                                            width: 210.0,
-                                            image: AssetImage(
-                                                rooms[index]['Image']),
-                                            fit: BoxFit.cover,
-                                          ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              '6 person Interested',
+                                              style: TextStyle(
+                                                fontSize: 16.0,
+                                                // fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Room will be deleted on 11/10/2022",
+                                              style: TextStyle(
+                                                color: Colors.amber,
+                                                fontSize: 12.0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      // Positioned(
-                                      //   left: 10.0,
-                                      //   bottom: 10.0,
-                                      //   child: Column(
-                                      //     crossAxisAlignment:
-                                      //         CrossAxisAlignment.start,
-                                      //     children: <Widget>[
-                                      //       Text(
-                                      //         "xzvdvzv",
-                                      //         style: TextStyle(
-                                      //           color: Colors.white,
-                                      //           fontSize: 24.0,
-                                      //           fontWeight: FontWeight.w600,
-                                      //           letterSpacing: 1.2,
-                                      //         ),
-                                      //       ),
-                                      //       Row(
-                                      //         children: <Widget>[
-                                      //           // Icon(
-                                      //           //   Icon.locationArrow,
-                                      //           //   size: 10.0,
-                                      //           //   color: Colors.white,
-                                      //           // ),
-                                      //           SizedBox(width: 5.0),
-                                      //           Text(
-                                      //             "davcadvd",
-                                      //             style: TextStyle(
-                                      //               color: Colors.white,
-                                      //             ),
-                                      //           ),
-                                      //         ],
-                                      //       ),
-                                      //     ],
-                                      //   ),
-                                      // ),
-                                    ],
+                                    ),
                                   ),
-                                )
-                              ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0.0, 2.0),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: <Widget>[
+                                        ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            child: Image(
+                                              height: 180.0,
+                                              width: 210.0,
+                                              image: AssetImage(
+                                                  rooms[index]['Image']),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        
+                                        // Positioned(
+                                        //   left: 10.0,
+                                        //   bottom: 10.0,
+                                        //   child: Column(
+                                        //     crossAxisAlignment:
+                                        //         CrossAxisAlignment.start,
+                                        //     children: <Widget>[
+                                        //       Text(
+                                        //         "xzvdvzv",
+                                        //         style: TextStyle(
+                                        //           color: Colors.white,
+                                        //           fontSize: 24.0,
+                                        //           fontWeight: FontWeight.w600,
+                                        //           letterSpacing: 1.2,
+                                        //         ),
+                                        //       ),
+                                        //       Row(
+                                        //         children: <Widget>[
+                                        //           // Icon(
+                                        //           //   Icon.locationArrow,
+                                        //           //   size: 10.0,
+                                        //           //   color: Colors.white,
+                                        //           // ),
+                                        //           SizedBox(width: 5.0),
+                                        //           Text(
+                                        //             "davcadvd",
+                                        //             style: TextStyle(
+                                        //               color: Colors.white,
+                                        //             ),
+                                        //           ),
+                                        //         ],
+                                        //       ),
+                                        //     ],
+                                        //   ),
+                                        // ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ]))),
+                ]),
+          ))),
       bottomNavigationBar: Container(
         height: screenWidth * .200,
         decoration: BoxDecoration(
@@ -704,80 +713,83 @@ class _MyWidgetState extends State<HomePage> {
             ),
           ],
         ),
-        child: ListView.builder(
-          itemCount: 4,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-          itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              setState(
-                () {
-                  currentIndex = index;
-                  print(currentIndex);
-                  if (currentIndex == 0) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                                email: '',
-                              )),
-                    );
-                  } else if (currentIndex == 1) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MapView()),
-                    );
-                  } else if (currentIndex == 2) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FetchData()),
-                    );
-                  } else if (currentIndex == 3) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileScreen(
-                                email: '',
-                              )),
-                    );
-                  }
-                },
-              );
-            },
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 1000),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  margin: EdgeInsets.only(
-                    bottom: index == currentIndex ? 0 : screenWidth * .05,
-                    right: screenWidth * .0422,
-                    left: screenWidth * .0422,
-                  ),
-                  width: screenWidth * .128,
-                  height: index == currentIndex ? screenWidth * .02 : 0,
-                  decoration: BoxDecoration(
-                    color: kPrimaryYellow,
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(10),
+        child: SizedBox(
+          child: ListView.builder(
+            itemCount: 4,
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                setState(
+                  () {
+                    currentIndex = index;
+                    print(currentIndex);
+                    if (currentIndex == 0) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                  email: '',
+                                )),
+                      );
+                    } else if (currentIndex == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapView()),
+                      );
+                    } else if (currentIndex == 2) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FetchData()),
+                      );
+                    } else if (currentIndex == 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                                  email: '',
+                                )),
+                      );
+                    }
+                  },
+                );
+              },
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 1000),
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    margin: EdgeInsets.only(
+                      bottom: index == currentIndex ? 0 : screenWidth * .05,
+                      right: screenWidth * .0422,
+                      left: screenWidth * .0422,
+                    ),
+                    width: screenWidth * .128,
+                    height: index == currentIndex ? screenWidth * .02 : 0,
+                    decoration: BoxDecoration(
+                      color: kPrimaryYellow,
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(10),
+                      ),
                     ),
                   ),
-                ),
-                Icon(
-                  listOfIcons[index],
-                  size: screenWidth * .08,
-                  color: index == currentIndex
-                      ? kPrimaryYellow
-                      : kPrimaryWhiteColor,
-                ),
-                SizedBox(height: screenWidth * .03),
-              ],
+                  Icon(
+                    listOfIcons[index],
+                    size: screenWidth * .08,
+                    color: index == currentIndex
+                        ? kPrimaryYellow
+                        : kPrimaryWhiteColor,
+                  ),
+                  SizedBox(height: screenWidth * .03),
+                ],
+              ),
             ),
           ),
         ),
+        
       ),
     );
   }

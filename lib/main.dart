@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'Login': (context) => CheckAuth(),
         'onboard': (context) =>
-            SignIn_body(), // This is for future use onboard option ADDED BY SHAN!
+            SignIn_body(), // This is for future use onboard option ADDED BY sharmi!
       },
     );
   }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:practise/Screens/Home/Home.dart';
+import 'package:practise/Screens/Payment/payment_home.dart';
 import 'package:practise/Utils/Constraints.dart';
 
 class Payment extends StatefulWidget {
@@ -41,7 +42,7 @@ class _PaymentState extends State<Payment> {
 
   String? password;
   bool _isLoading = false;
-  int totalprice = 20;
+  int totalprice = 0;
 
 //firebase initilation
   final fb = FirebaseDatabase.instance;
@@ -101,7 +102,7 @@ class _PaymentState extends State<Payment> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  'Payment Management',
+                  'Customer Reservations ',
                   style: TextStyle(
                       fontSize: 20,
                       color: kPrimaryYellow,
@@ -249,7 +250,7 @@ class _PaymentState extends State<Payment> {
                       Padding(
                         padding: const EdgeInsets.only(right: 20.0),
                         child: Text(
-                          totalprice.toString() + " USD",
+                          totalprice.toString() + " LKR",
                           style: TextStyle(
                               fontSize: 20,
                               color: primaryColor,
@@ -314,10 +315,7 @@ class _PaymentState extends State<Payment> {
             clear();
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => HomePage(
-                        email: '',
-                      )),
+              MaterialPageRoute(builder: (context) => Payment_Home()),
             );
           }
         },

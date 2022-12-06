@@ -187,7 +187,7 @@ class _ImageUploadsState extends State<ImageUploads> {
     }
   }
 
-  CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
+//  CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
 
   @override
   Widget build(BuildContext context) {

@@ -68,6 +68,7 @@ dependencies:
   uuid: ^3.0.4
   pin_code_fields: ^7.0.0-nullsafety
   flutter_vector_icons: ^1.0.0
+  google_fonts: ^3.0.1
   
   
   

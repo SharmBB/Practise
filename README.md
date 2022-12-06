@@ -1,4 +1,4 @@
-# practise
+# BeLocal (Travel Guide)
 
 A new Flutter project.
 
